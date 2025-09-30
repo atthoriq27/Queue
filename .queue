@@ -1,0 +1,79 @@
+#include <iostream>
+#define MAX 100
+using namespace std;
+
+int Q[MAX];   // array queue
+int F, R;     // front & rear
+
+// Inisialisasi (AWAL)
+void AWAL() {
+    F = 0;
+    R = -1;
+}
+
+// Cek kondisi
+bool isEmpty() {
+    return (F == R + 1);
+}
+bool isFull() {
+    return (R == MAX - 1);
+}
+
+// INSERT (Enqueue)
+void INSERT(int x) {
+    if (!isFull()) {
+        Q[++R] = x;
+        cout << x << " masuk antrian.\n";
+    } else {
+        cout << "Antrian penuh!\n";
+    }
+}
+
+// DELETE (Dequeue)
+void DELETE() {
+    if (!isEmpty()) {
+        int x = Q[F++];
+        cout << x << " keluar dari antrian.\n";
+    } else {
+        cout << "Antrian kosong!\n";
+    }
+}
+
+// RESET
+void RESET() {
+    F = 0;
+    R = -1;
+    cout << "Queue direset.\n";
+}
+
+// Hitung elemen
+int COUNT() {
+    if (isEmpty()) return 0;
+    return (R - F + 1);
+}
+
+int main() {
+    AWAL();  // inisialisasi
+
+    // Contoh: enqueue 10 data
+    cout << "=== ENQUEUE 10 DATA ===\n";
+    for (int i = 1; i <= 10; i++) {
+        INSERT(i * 10);
+    }
+
+    // Contoh: dequeue 5 data
+    cout << "\n=== DEQUEUE 5 DATA ===\n";
+    for (int i = 0; i < 5; i++) {
+        DELETE();
+    }
+
+    // Tampilkan jumlah elemen
+    cout << "\nJumlah elemen sekarang = " << COUNT() << endl;
+
+    // Reset queue
+    RESET();
+
+    cout << "Jumlah elemen setelah reset = " << COUNT() << endl;
+
+    return 0;
+}
